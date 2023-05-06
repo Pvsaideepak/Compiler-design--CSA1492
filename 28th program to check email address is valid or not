@@ -1,15 +1,19 @@
 lex code:
-%%
-[A-Z]+[\t\n ] { printf("%s is a capital word\n",yytext); }
-.  ;
-%%
 
-int main( ) 
+%{
+int flag=0;
+%}
+%%
+[a-z . 0-9]+@[a-z]+".com"|".in" { flag=1; }
+%%
+int main()
 {
-	printf("Enter String :\n");
-	yylex();
+yylex();
+if(flag==1)
+printf("Accepted");
+else
+printf("Not Accepted");
 }
-int yywrap( )
-{
-	return 1;
-}
+int yywrap()
+{ return 1;
+ }
